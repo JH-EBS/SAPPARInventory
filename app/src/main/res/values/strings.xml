@@ -9,7 +9,7 @@
     <string name="menu_about">About 1.0</string>
     <string name="menu_exit">Exit</string>
     <string name="menu_logon_off">Logon/Logoff</string>
-    <string name="title_activity_download_items">DownloadItems</string>
+    <string name="title_activity_download_items">Download Items</string>
 
     <string name="about_text">You are on the About Activity screen!</string>
     <string name="downloadItems_text">You are on the Download Items Activity screen!</string>
