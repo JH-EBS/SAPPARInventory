@@ -1,23 +1,23 @@
 package com.sap.johnshopkins.sapparinventory;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class DownloadItemsActivity extends ActionBarActivity {
+public class CountTemplateActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_download_items2);
+        setContentView(R.layout.activity_count_template);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_download_items, menu);
+        getMenuInflater().inflate(R.menu.menu_count_template, menu);
         return true;
     }
 

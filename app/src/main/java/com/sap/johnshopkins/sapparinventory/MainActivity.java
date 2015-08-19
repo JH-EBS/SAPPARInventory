@@ -1,8 +1,8 @@
 package com.sap.johnshopkins.sapparinventory;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +53,12 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
+
+
+
+
+
     private Spinner spinnerJHEDIDs = null;
 
     private int triggerIndex = 0;
@@ -62,51 +67,97 @@ public class MainActivity extends ActionBarActivity {
     private String [] triggerStrings = {"lkrishn1", "dphelps1", "bking1", "mgeier1"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button button_count;
+        Button button_load_templates;
+        Button button_refresh_templates;
+        Button button_refresh_jhedids;
+        Button button_test_connect;
+        Button button_exit;
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        spinnerJHEDIDs  = (Spinner)findViewById(R.id.spinnerJHEDIDs);
-        addSpinnerJHEDIDsListener();
+//        spinnerJHEDIDs  = (Spinner)findViewById(R.id.spinnerJHEDIDs);
+//        addSpinnerJHEDIDsListener();
 
-        populateJHEDIDs();
+
+            // Locate the buttons in activity_main.xml
+        button_count = (Button) findViewById(R.id.btn_count);
+        button_load_templates = (Button) findViewById(R.id.btn_load_templates);
+        button_refresh_templates = (Button) findViewById(R.id.btn_refresh_template_list);
+        button_refresh_jhedids = (Button) findViewById(R.id.btn_refresh_JHEDIDs);
+        button_test_connect = (Button) findViewById(R.id.btn_test_connectivity);
+        button_exit = (Button) findViewById(R.id.btn_exit);
+
+
+            // Capture button clicks
+        button_count.setOnClickListener(new OnClickListener() {
+                public void onClick(View arg0) {
+
+                    // Start NewActivity.class
+                    Intent myIntent = new Intent(MainActivity.this,
+                            ChooseTemplateMenuActivity.class);
+                    startActivity(myIntent);
+                }
+            });
+        // Capture button clicks
+        button_load_templates.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+                Intent myIntent = new Intent(MainActivity.this,
+                        LoadTemplateActivity.class);
+                startActivity(myIntent);
+            }
+        });
+        // Capture button clicks
+        button_refresh_jhedids.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+ /*               Intent myIntent = new Intent(MainActivity.this,
+                        CountTemplate.class);
+                startActivity(myIntent);*/
+            }
+        });
+        // Capture button clicks
+        button_refresh_templates.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+  /*              Intent myIntent = new Intent(MainActivity.this,
+                        CountTemplate.class);
+                startActivity(myIntent);*/
+            }
+        });
+
+        // Capture button clicks
+        button_test_connect.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+  /*              Intent myIntent = new Intent(MainActivity.this,
+                        CountTemplate.class);
+                startActivity(myIntent);*/
+            }
+        });
+
+        // Capture button clicks
+        button_exit.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+  /*              Intent myIntent = new Intent(MainActivity.this,
+                        CountTemplate.class);
+                startActivity(myIntent);*/
+            }
+        });
+//        populateJHEDIDs();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    /*
-     @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-         // Handle action bar item clicks here. The action bar will
-         // automatically handle clicks on the Home/Up button, so long
-         // as you specify a parent activity in AndroidManifest.xml.
-         int id = item.getItemId();
-
-         //noinspection SimplifiableIfStatement
-         if (id == R.id.menu_about) {
-             return true;
-         }
 
 
-
-         //<item android:id="@+id/menu_logon_off"
-         //<item android:id="@+id/menu_count"
-        // <item android:id="@+id/menu_download_items"
-        // <item android:id="@+id/menu_test_connect"
-         //<item android:id="@+id/menu_help"
-         //<item android:id="@+id/menu_exit"
-         //<item android:id="@+id/menu_about"
-
-
-
-
-
-
-         return super.onOptionsItemSelected(item);
-     }*/
-    private void addSpinnerJHEDIDsListener() {
+ /*   private void addSpinnerJHEDIDsListener() {
 
         spinnerJHEDIDs.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -132,7 +183,7 @@ public class MainActivity extends ActionBarActivity {
 
         spinnerJHEDIDs.setAdapter(spinnerAdapter);
         spinnerJHEDIDs.setSelection(triggerIndex);
-    }
+    }*/
 
  /*   private void setTrigger() {
 
@@ -153,21 +204,5 @@ public class MainActivity extends ActionBarActivity {
     }
 
 */
- @Override
- public boolean onOptionsItemSelected(MenuItem item) {
-     // Handle item selection
-     switch (item.getItemId()) {
-         case R.id.menu_download_items:
-             // Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-             startActivity(new Intent(getApplicationContext(), DownloadItemsActivity.class));
-             return true;
-         case R.id.menu_about:
-             // Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
-             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
-             return true;
 
-         default:
-             return super.onOptionsItemSelected(item);
-     }
- }
 }

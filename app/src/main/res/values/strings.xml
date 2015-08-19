@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SAPPARInventory</string>
-    <string name="EnterJHEDIDLabel">Enter JHEDID:</string>
+    <string name="EnterJHEDIDLabel">JHEDID:</string>
+    <string name="EnterPlantLabel">Plant:</string>
+    <string name="EnterTemplateLabel">PAR Template:</string>
     <string name="action_settings">Settings</string>
     <string name="menu_count">Count Templates</string>
     <string name="menu_download_items">Download Template Items</string>
@@ -21,6 +23,12 @@
     <string name="btn_menu_refresh_JHEDIDs">Refresh JHED ID  List</string>
     <string name="btn_menu_test_Connect">Test SAP Connectivity</string>
     <string name="btn_menu_exit">Exit</string>
+    <string name="title_activity_count_templates_menu">CountTemplatesMenu</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_count_template">Template name here!!</string>
+    <string name="title_activity_load_template">Load Templates to Count</string>
+    <string name="title_activity_choose_template_menu">Select PAR Template</string>
 
 
 

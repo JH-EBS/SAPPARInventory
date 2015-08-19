@@ -10,12 +10,11 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class TaskListDB {
+public class PARCaptureDB {
 
     // database constants
-    public static final String DB_NAME = "tasklist.db";
+    public static final String DB_NAME = "PARCaptureDB.db";
     public static final int    DB_VERSION = 1;
-
     // list table constants
     public static final String LIST_TABLE = "list";
 
@@ -98,8 +97,8 @@ public class TaskListDB {
             Log.d("Task list", "Upgrading db from version "
                     + oldVersion + " to " + newVersion);
 
-            db.execSQL(TaskListDB.DROP_LIST_TABLE);
-            db.execSQL(TaskListDB.DROP_TASK_TABLE);
+            db.execSQL(PARCaptureDB.DROP_LIST_TABLE);
+            db.execSQL(PARCaptureDB.DROP_TASK_TABLE);
             onCreate(db);
         }
     }
@@ -109,7 +108,7 @@ public class TaskListDB {
     private DBHelper dbHelper;
 
     // constructor
-    public TaskListDB(Context context) {
+    public PARCaptureDB(Context context) {
         dbHelper = new DBHelper(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -127,7 +126,7 @@ public class TaskListDB {
             db.close();
     }
 
-    // public methods
+/*    // public methods
     public ArrayList<List> getLists() {
         ArrayList<List> lists = new ArrayList<List>();
         openReadableDB();
@@ -266,5 +265,5 @@ public class TaskListDB {
         this.closeDB();
 
         return rowCount;
-    }
+    }*/
 }
