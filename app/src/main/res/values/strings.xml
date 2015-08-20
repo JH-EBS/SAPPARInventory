@@ -13,7 +13,7 @@
 
     <string name="about_text">You are on the About Activity screen!</string>
     <string name="downloadItems_text">You are on the Download Items Activity screen!</string>
-    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_about">About Activity</string>
     <string name="TestNumericKeyboard">Test Numeric Keyboard: </string>
     <string name="btn_menu_count">Count Templates</string>
     <string name="btn_menu_load">Load Template Items</string>
@@ -21,6 +21,7 @@
     <string name="btn_menu_refresh_JHEDIDs">Refresh JHED ID  List</string>
     <string name="btn_menu_test_Connect">Test SAP Connectivity</string>
     <string name="btn_menu_exit">Exit</string>
+    <string name="lokesh_tst_string">String to test sync to GIT</string>
 
 
 
