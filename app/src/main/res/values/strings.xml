@@ -21,7 +21,7 @@
     <string name="btn_menu_refresh_JHEDIDs">Refresh JHED ID  List</string>
     <string name="btn_menu_test_Connect">Test SAP Connectivity</string>
     <string name="btn_menu_exit">Exit</string>
-    <string name="lokesh_tst_string">String to test sync to GIT</string>
+    <string name="lokesh_tst_string">String to test sync to GIT </string>
 
 
 
