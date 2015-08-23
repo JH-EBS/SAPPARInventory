@@ -71,7 +71,7 @@ public class PARCaptureDB {
     public static final String DROP_PLANTS_TABLE =
             "DROP TABLE IF EXISTS " + PLANTS_TABLE;
 
-    public static final String CREATE_JHEDID_TABLE =
+    public static final String CREATE_PLANTS_TABLE =
             "CREATE TABLE " + PLANTS_TABLE + " (" +
                     PLANTS_ID   + " TEXT PRIMARY KEY , " +
                     PLANTS_NAME + " TEXT PRIMARY KEY);";
@@ -242,8 +242,13 @@ public class PARCaptureDB {
         public void onCreate(SQLiteDatabase db) {
             // create tables
             db.execSQL(CREATE_JHEDID_TABLE);
+            db.execSQL(CREATE_PLANTS_TABLE);
+            db.execSQL(CREATE_PARHEADER_TABLE);
+            db.execSQL(CREATE_PARDETAIL_TABLE);
             db.execSQL(CREATE_TASK_TABLE);
 
+
+/*
             // insert default lists
             db.execSQL("INSERT INTO list VALUES (1, 'Personal')");
             db.execSQL("INSERT INTO list VALUES (2, 'Business')");
@@ -253,6 +258,9 @@ public class PARCaptureDB {
                     "'Rent\nPhone\nInternet', '0', '0')");
             db.execSQL("INSERT INTO task VALUES (2, 1, 'Get hair cut', " +
                     "'', '0', '0')");
+
+*/
+
         }
 
         @Override
@@ -262,8 +270,11 @@ public class PARCaptureDB {
             Log.d("Task list", "Upgrading db from version "
                     + oldVersion + " to " + newVersion);
 
-            db.execSQL(TaskListDB.DROP_LIST_TABLE);
-            db.execSQL(TaskListDB.DROP_TASK_TABLE);
+            db.execSQL(PARCaptureDB.DROP_JHEDID_TABLE);
+            db.execSQL(PARCaptureDB.DROP_PLANTS_TABLE);
+            db.execSQL(PARCaptureDB.DROP_PARHEADER_TABLE);
+            db.execSQL(PARCaptureDB.DROP_PARDETAIL_TABLE);
+            db.execSQL(PARCaptureDB.DROP_TASK_TABLE);
             onCreate(db);
         }
     }
@@ -273,7 +284,7 @@ public class PARCaptureDB {
     private DBHelper dbHelper;
 
     // constructor
-    public TaskListDB(Context context) {
+    public PARCaptureDB(Context context) {
         dbHelper = new DBHelper(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -290,6 +301,7 @@ public class PARCaptureDB {
         if (db != null)
             db.close();
     }
+/*
 
     // public methods
     public ArrayList<List> getLists() {
@@ -329,6 +341,7 @@ public class PARCaptureDB {
 
         return list;
     }
+*/
 
     public ArrayList<Task> getTasks(String listName) {
         String where =
