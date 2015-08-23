@@ -54,7 +54,6 @@ public class PARCaptureDB {
                     JHEDID_FLAG + " TEXT );";
 
 
-    //*-----tJHEDID table---------*
 
 
     //*-----tPlants table---------*
@@ -77,7 +76,6 @@ public class PARCaptureDB {
                     PLANTS_ID   + " TEXT PRIMARY KEY , " +
                     PLANTS_NAME + " TEXT PRIMARY KEY);";
 
-    //*-----tPlants table---------*
 
 
     //*-----tPARHeader table---------*
@@ -124,25 +122,36 @@ public class PARCaptureDB {
     public static final String DROP_PARHEADER_TABLE =
             "DROP TABLE IF EXISTS " + PARHEADER_TABLE;
 
-    //*-----tPARHeader table---------*
-
+    public static final String CREATE_PARHEADER_TABLE =
+            "CREATE TABLE " + PARHEADER_TABLE + " (" +
+                    PARHEADER_ID   + " TEXT PRIMARY KEY , " +
+                    PARHEADER_NAME + " TEXT  NOT NULL, " +
+                    PARHEADER_PLANT + " TEXT  NOT NULL, " +
+                    PARHEADER_STATUS + " TEXT , " +
+                    PARHEADER_TOTALITMS + " INTEGER , " +
+                    PARHEADER_TOTALITMSPSTD + " INTEGER , " +
+                    PARHEADER_TOTALQTY + " INTEGER , " +
+                    PARHEADER_CREATEDT + " TEXT , " +
+                    PARHEADER_CREATETM + " TEXT , " +
+                    PARHEADER_UPDATEDT + " TEXT , " +
+                    PARHEADER_UPDATETM + " TEXT , " +
+                    PARHEADER_SESSIONID + " TEXT );";
 
 
     //*-----tPARDetail table---------*
     // tPARDetail  table constants
     public static final String PARDETAIL_TABLE = "tPARDetail";
 
+    public static final String PARDETAIL_ID = "JHEDID";
+    public static final int    PARDETAIL_ID_COL = 0;
 
+    public static final String PARDETAIL_NAME = "TemplateName";
+    public static final int    PARDETAIL_NAME_COL = 1;
 
-    // CREATE and DROP TABLE statements
-    public static final String DROP_PARDETAIL_TABLE =
-            "DROP TABLE IF EXISTS " + PARDETAIL_TABLE;
+    public static final String PARDETAIL_PLANT = "PlantID";
+    public static final int    PARDETAIL_PLANT_COL = 2;
 
 /*
-    // tPARDetail
-    sqlCreateTableStatement = "create table tPARDetail (JHEDID nvarchar (8),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "TemplateName nvarchar (30),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "PlantID nvarchar (4),"
     sqlCreateTableStatement = sqlCreateTableStatement & "RowNum int,"
     sqlCreateTableStatement = sqlCreateTableStatement & "MaterialID nvarchar (18),"
     sqlCreateTableStatement = sqlCreateTableStatement & "PARQuantity int, "
@@ -150,13 +159,34 @@ public class PARCaptureDB {
     sqlCreateTableStatement = sqlCreateTableStatement & "MfgPart nvarchar (40),"
     sqlCreateTableStatement = sqlCreateTableStatement & "MatlDescription nvarchar (40),"
     sqlCreateTableStatement = sqlCreateTableStatement & "IssueUOM nvarchar (40),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "UpdateDate nvarchar (8),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "UpdateTime nvarchar (6),"
     sqlCreateTableStatement = sqlCreateTableStatement & "VendorNum nvarchar (16),"
     sqlCreateTableStatement = sqlCreateTableStatement & "PatientChargeInd nvarchar (1),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "SessionID nvarchar (25) )"
 
 */
+
+
+    public static final String PARDETAIL_UPDATEDT = "UpdateDate";
+    public static final int    PARDETAIL_UPDATEDT_COL = 9;
+
+    public static final String PARDETAIL_UPDATETM = "UpdateTime";
+    public static final int    PARDETAIL_UPDATETM_COL = 10;
+
+    public static final String PARDETAIL_SESSIONID = "SessionID";
+    public static final int    PARDETAIL_SESSIONID_COL = 11;
+
+    // CREATE and DROP TABLE statements
+    public static final String DROP_PARDETAIL_TABLE =
+            "DROP TABLE IF EXISTS " + PARDETAIL_TABLE;
+
+    public static final String CREATE_PARDETAIL_TABLE =
+            "CREATE TABLE " + PARDETAIL_TABLE + " (" +
+                    PARDETAIL_ID   + " TEXT PRIMARY KEY , " +
+                    PARDETAIL_NAME + " TEXT  NOT NULL, " +
+                    PARDETAIL_PLANT + " TEXT  NOT NULL, " +
+                    PARDETAIL_UPDATEDT + " TEXT , " +
+                    PARDETAIL_UPDATETM + " TEXT , " +
+                    PARDETAIL_SESSIONID + " TEXT );";
+
     //*-----tPARDetail table---------*
 
 
