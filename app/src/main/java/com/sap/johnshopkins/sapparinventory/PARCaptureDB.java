@@ -1,4 +1,7 @@
+
 package com.sap.johnshopkins.sapparinventory;
+
+
 
 import java.util.ArrayList;
 
@@ -10,20 +13,152 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class TaskListDB {
+public class PARCaptureDB {
 
     // database constants
-    public static final String DB_NAME = "tasklist.db";
+    public static final String DB_NAME = "PARCapture.db";
     public static final int    DB_VERSION = 1;
 
-    // list table constants
-    public static final String LIST_TABLE = "list";
+    // list of tables required
+    // tJHEDID
+    // tPlants
+    // tPARHeader
+    // tPARDetail
 
-    public static final String LIST_ID = "_id";
-    public static final int    LIST_ID_COL = 0;
 
-    public static final String LIST_NAME = "list_name";
-    public static final int    LIST_NAME_COL = 1;
+    //*-----tJHEDID table---------*
+    // tJHEDID  table constants
+    public static final String JHEDID_TABLE = "tJHEDID";
+
+    public static final String JHEDID_ID = "JHEDID";
+    public static final int    JHEDID_ID_COL = 0;
+
+    public static final String JHEDID_PLANT = "PlantID";
+    public static final int    JHEDID_PLANT_COL = 1;
+
+    public static final String JHEDID_PARTEMPLATE = "PARTemplate";
+    public static final int    JHEDID_PARTEMPLATE_COL = 2;
+
+    public static final String JHEDID_FLAG = "LastUsedFlag";
+    public static final int    JHEDID_FLAG_COL = 3;
+
+    // CREATE and DROP TABLE statements
+    public static final String DROP_JHEDID_TABLE =
+            "DROP TABLE IF EXISTS " + JHEDID_TABLE;
+
+    public static final String CREATE_JHEDID_TABLE =
+            "CREATE TABLE " + JHEDID_TABLE + " (" +
+                    JHEDID_ID   + " TEXT PRIMARY KEY , " +
+                    JHEDID_PLANT + " TEXT  NOT NULL, " +
+                    JHEDID_PARTEMPLATE  + " TEXT NOT NULL, " +
+                    JHEDID_FLAG + " TEXT );";
+
+
+    //*-----tJHEDID table---------*
+
+
+    //*-----tPlants table---------*
+    // tPlants  table constants
+    public static final String PLANTS_TABLE = "tPlants";
+
+    public static final String PLANTS_ID = "PlantID";
+    public static final int    PLANTS_ID_COL = 0;
+
+    public static final String PLANTS_NAME = "TemplateName";
+    public static final int    PLANTS_NAME_COL = 1;
+
+
+    // CREATE and DROP TABLE statements
+    public static final String DROP_PLANTS_TABLE =
+            "DROP TABLE IF EXISTS " + PLANTS_TABLE;
+
+    public static final String CREATE_JHEDID_TABLE =
+            "CREATE TABLE " + PLANTS_TABLE + " (" +
+                    PLANTS_ID   + " TEXT PRIMARY KEY , " +
+                    PLANTS_NAME + " TEXT PRIMARY KEY);";
+
+    //*-----tPlants table---------*
+
+
+    //*-----tPARHeader table---------*
+    // tPARHeader  table constants
+    public static final String PARHEADER_TABLE = "tPARHeader";
+
+    public static final String PARHEADER_ID = "JHEDID";
+    public static final int    PARHEADER_ID_COL = 0;
+
+    public static final String PARHEADER_NAME = "TemplateName";
+    public static final int    PARHEADER_NAME_COL = 1;
+
+    public static final String PARHEADER_PLANT = "PlantID";
+    public static final int    PARHEADER_PLANT_COL = 2;
+
+    public static final String PARHEADER_STATUS = "Status";
+    public static final int    PARHEADER_STATUS_COL = 3;
+
+    public static final String PARHEADER_TOTALITMS = "TotalItems";
+    public static final int    PARHEADER_TOTALITMS_COL = 4;
+
+    public static final String PARHEADER_TOTALITMSPSTD = "TotalItemsPosted";
+    public static final int    PARHEADER_TOTALITMSPSTD_COL = 5;
+
+    public static final String PARHEADER_TOTALQTY = "TotalQuantity";
+    public static final int    PARHEADER_TOTALQTY_COL = 6;
+
+    public static final String PARHEADER_CREATEDT = "CreateDate";
+    public static final int    PARHEADER_CREATEDT_COL = 7;
+
+    public static final String PARHEADER_CREATETM = "CreateTime";
+    public static final int    PARHEADER_CREATETM_COL = 8;
+
+    public static final String PARHEADER_UPDATEDT = "UpdateDate";
+    public static final int    PARHEADER_UPDATEDT_COL = 9;
+
+    public static final String PARHEADER_UPDATETM = "UpdateTime";
+    public static final int    PARHEADER_UPDATETM_COL = 10;
+
+    public static final String PARHEADER_SESSIONID = "SessionID";
+    public static final int    PARHEADER_SESSIONID_COL = 11;
+
+    // CREATE and DROP TABLE statements
+    public static final String DROP_PARHEADER_TABLE =
+            "DROP TABLE IF EXISTS " + PARHEADER_TABLE;
+
+    //*-----tPARHeader table---------*
+
+
+
+    //*-----tPARDetail table---------*
+    // tPARDetail  table constants
+    public static final String PARDETAIL_TABLE = "tPARDetail";
+
+
+
+    // CREATE and DROP TABLE statements
+    public static final String DROP_PARDETAIL_TABLE =
+            "DROP TABLE IF EXISTS " + PARDETAIL_TABLE;
+
+/*
+    // tPARDetail
+    sqlCreateTableStatement = "create table tPARDetail (JHEDID nvarchar (8),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "TemplateName nvarchar (30),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "PlantID nvarchar (4),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "RowNum int,"
+    sqlCreateTableStatement = sqlCreateTableStatement & "MaterialID nvarchar (18),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "PARQuantity int, "
+    sqlCreateTableStatement = sqlCreateTableStatement & "PARCount int, "
+    sqlCreateTableStatement = sqlCreateTableStatement & "MfgPart nvarchar (40),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "MatlDescription nvarchar (40),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "IssueUOM nvarchar (40),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "UpdateDate nvarchar (8),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "UpdateTime nvarchar (6),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "VendorNum nvarchar (16),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "PatientChargeInd nvarchar (1),"
+    sqlCreateTableStatement = sqlCreateTableStatement & "SessionID nvarchar (25) )"
+
+*/
+    //*-----tPARDetail table---------*
+
 
     // task table constants
     public static final String TASK_TABLE = "task";
@@ -46,11 +181,6 @@ public class TaskListDB {
     public static final String TASK_HIDDEN = "hidden";
     public static final int    TASK_HIDDEN_COL = 5;
 
-    // CREATE and DROP TABLE statements
-    public static final String CREATE_LIST_TABLE =
-            "CREATE TABLE " + LIST_TABLE + " (" +
-                    LIST_ID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    LIST_NAME + " TEXT    NOT NULL UNIQUE);";
 
     public static final String CREATE_TASK_TABLE =
             "CREATE TABLE " + TASK_TABLE + " (" +
@@ -61,11 +191,15 @@ public class TaskListDB {
                     TASK_COMPLETED  + " TEXT, " +
                     TASK_HIDDEN     + " TEXT);";
 
-    public static final String DROP_LIST_TABLE =
-            "DROP TABLE IF EXISTS " + LIST_TABLE;
 
     public static final String DROP_TASK_TABLE =
             "DROP TABLE IF EXISTS " + TASK_TABLE;
+
+
+
+
+
+
 
     private static class DBHelper extends SQLiteOpenHelper {
 
@@ -77,7 +211,7 @@ public class TaskListDB {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // create tables
-            db.execSQL(CREATE_LIST_TABLE);
+            db.execSQL(CREATE_JHEDID_TABLE);
             db.execSQL(CREATE_TASK_TABLE);
 
             // insert default lists
@@ -268,3 +402,4 @@ public class TaskListDB {
         return rowCount;
     }
 }
+
