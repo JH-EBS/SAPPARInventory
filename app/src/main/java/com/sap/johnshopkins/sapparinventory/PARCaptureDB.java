@@ -151,19 +151,32 @@ public class PARCaptureDB {
     public static final String PARDETAIL_PLANT = "PlantID";
     public static final int    PARDETAIL_PLANT_COL = 2;
 
-/*
-    sqlCreateTableStatement = sqlCreateTableStatement & "RowNum int,"
-    sqlCreateTableStatement = sqlCreateTableStatement & "MaterialID nvarchar (18),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "PARQuantity int, "
-    sqlCreateTableStatement = sqlCreateTableStatement & "PARCount int, "
-    sqlCreateTableStatement = sqlCreateTableStatement & "MfgPart nvarchar (40),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "MatlDescription nvarchar (40),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "IssueUOM nvarchar (40),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "VendorNum nvarchar (16),"
-    sqlCreateTableStatement = sqlCreateTableStatement & "PatientChargeInd nvarchar (1),"
+    public static final String PARDETAIL_ROWNUM = "RowNum";
+    public static final int    PARDETAIL_ROWNUM_COL = 2;
 
-*/
+    public static final String PARDETAIL_MATERIAL = "MaterialID";
+    public static final int    PARDETAIL_MATERIAL_COL = 2;
 
+    public static final String PARDETAIL_PARQTY = "PARQuantity";
+    public static final int    PARDETAIL_PARQTY_COL = 2;
+
+    public static final String PARDETAIL_PARCNT = "PARCount";
+    public static final int    PARDETAIL_PARCNT_COL = 2;
+
+    public static final String PARDETAIL_MPART = "MfgPart";
+    public static final int    PARDETAIL_MPART_COL = 2;
+
+    public static final String PARDETAIL_MATDESC = "MatlDescription";
+    public static final int    PARDETAIL_MATDESC_COL = 2;
+
+    public static final String PARDETAIL_ISSUOM = "IssueUOM";
+    public static final int    PARDETAIL_ISSUOM_COL = 2;
+
+    public static final String PARDETAIL_VNDNUM = "VendorNum";
+    public static final int    PARDETAIL_VNDNUM_COL = 2;
+
+    public static final String PARDETAIL_PCHRGEIND = "PatientChargeInd";
+    public static final int    PARDETAIL_PCHRGEIND_COL = 2;
 
     public static final String PARDETAIL_UPDATEDT = "UpdateDate";
     public static final int    PARDETAIL_UPDATEDT_COL = 9;
@@ -183,6 +196,15 @@ public class PARCaptureDB {
                     PARDETAIL_ID   + " TEXT PRIMARY KEY , " +
                     PARDETAIL_NAME + " TEXT  NOT NULL, " +
                     PARDETAIL_PLANT + " TEXT  NOT NULL, " +
+                    PARDETAIL_ROWNUM + " INTEGER, " +
+                    PARDETAIL_MATERIAL + " TEXT NOT NULL, " +
+                    PARDETAIL_PARQTY + " INTEGER, " +
+                    PARDETAIL_PARCNT + " INTEGER, " +
+                    PARDETAIL_MPART + " TEXT, " +
+                    PARDETAIL_MATDESC + " TEXT, " +
+                    PARDETAIL_ISSUOM + " TEXT  NOT NULL, " +
+                    PARDETAIL_VNDNUM + " TEXT  NOT NULL, " +
+                    PARDETAIL_PCHRGEIND + " TEXT , " +
                     PARDETAIL_UPDATEDT + " TEXT , " +
                     PARDETAIL_UPDATETM + " TEXT , " +
                     PARDETAIL_SESSIONID + " TEXT );";
