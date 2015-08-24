@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SAPPARInventory.iml" filepath="$PROJECT_DIR$/SAPPARInventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SAPPARInventoryAndroidApp.iml" filepath="$PROJECT_DIR$/SAPPARInventoryAndroidApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.symbol.emdk/com.symbol.emdk.iml" filepath="$PROJECT_DIR$/com.symbol.emdk/com.symbol.emdk.iml" />
     </modules>
