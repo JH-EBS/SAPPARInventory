@@ -326,7 +326,7 @@ public class PARCaptureDB {
 /*
 
     // public methods
-    public ArrayList<List> getLists() {
+    p ublic ArrayList<List> getLists() {
         ArrayList<List> lists = new ArrayList<List>();
         openReadableDB();
         Cursor cursor = db.query(LIST_TABLE,
