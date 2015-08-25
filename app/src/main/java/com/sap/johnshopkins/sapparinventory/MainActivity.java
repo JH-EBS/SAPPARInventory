@@ -11,6 +11,12 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
+
+import org.ksoap2.*;
+import org.ksoap2.serialization.*;
+import org.ksoap2.transport.*;
+
 
 import com.symbol.emdk.EMDKManager;
 import com.symbol.emdk.EMDKResults;
@@ -55,12 +61,27 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class MainActivity extends Activity {
 
+   /* private final String NAMESPACE = "http://www.w3schools.com/webservices/";
+    private final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
+    private final String SOAP_ACTION = "http://www.w3schools.com/webservices/CelsiusToFahrenheit";
+    private final String METHOD_NAME = "CelsiusToFahrenheit";
+    private String TAG = "PGGURU";
+    private static String celcius;
+    private static String fahren;*/
 
 
+   private final String NAMESPACE = "http://jhu.edu/scmmmi060801/WirelessPARJHED";
+    private final String URL = "https://dvpi.erp.johnshopkins.edu/XISOAPAdapter/MessageServlet?channel=:WirelessPARJHEDWebService_BUSS:SOAP_WirelessPARJHEDWebService&amp;version=3.0&amp;Sender.Service=x&amp;Interface=x%5Ex";
+    private final String SOAP_ACTION = "http://jhu.edu/scmmmi060801/WirelessPARJHED/mi_WirelessPARJHED";
+    private final String METHOD_NAME = "mi_WirelessPARJHED";
+    private final String LOGIN_ID = "ddigreg4";
+    private final String PASS = "55#crabs";
+    private String TAG = "PGGURU";
+    private static String currstatus;
+    private static String responsefromWS;
 
 
     private Spinner spinnerJHEDIDs = null;
-
     private int triggerIndex = 0;
 
 
@@ -73,6 +94,7 @@ public class MainActivity extends Activity {
         Button button_refresh_jhedids;
         Button button_test_connect;
         Button button_exit;
+        TextView text_status;
 
 
         super.onCreate(savedInstanceState);
@@ -88,7 +110,7 @@ public class MainActivity extends Activity {
         button_refresh_jhedids = (Button) findViewById(R.id.btn_refresh_JHEDIDs);
         button_test_connect = (Button) findViewById(R.id.btn_test_connectivity);
         button_exit = (Button) findViewById(R.id.btn_exit);
-
+        text_status = (TextView) findViewById(R.id.txt_menu_status);
 
             // Capture button clicks
         button_count.setOnClickListener(new OnClickListener() {
@@ -113,11 +135,22 @@ public class MainActivity extends Activity {
         // Capture button clicks
         button_refresh_jhedids.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-
+                AsyncCallWS task = new AsyncCallWS();
+                                //Call execute
+                                task.execute();
                 // Start NewActivity.class
  /*               Intent myIntent = new Intent(MainActivity.this,
                         CountTemplate.class);
                 startActivity(myIntent);*/
+
+
+
+
+
+
+
+
+
             }
         });
         // Capture button clicks
@@ -204,5 +237,73 @@ public class MainActivity extends Activity {
     }
 
 */
+ public void getJHEDIDs(String ReqJHEDID) {
+//Create request
+     SoapObject request = new SoapObject("NAMESPACE", "METHOD_NAME");
+     //Property which holds input parameters
+     PropertyInfo JHEDIDPI = new PropertyInfo();
+     //Set Name
+     JHEDIDPI.setName("JHEDID");
+//Set Value
+     JHEDIDPI.setValue(ReqJHEDID);
+//Set dataType
+     JHEDIDPI.setType(String.class);
+//Add the property to request object
+     request.addProperty(JHEDIDPI);
+//Create envelope
+     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+   //  envelope.dotNet = true;
+//Set output SOAP object
+     envelope.setOutputSoapObject(request);
+     //Create HTTP call object
+     HttpTransportBasicAuth androidHttpTransport = new HttpTransportBasicAuth (URL, LOGIN_ID, PASS);
+     try {
+//Invole web service
+         androidHttpTransport.call(SOAP_ACTION, envelope);
+         //Get the response
+         SoapPrimitive response = (SoapPrimitive)
+                 envelope.getResponse();
+         //Assign it to fahren static variable
+         responsefromWS = response.toString();
+     } catch (Exception e) {
+         e.printStackTrace();    }}
 
+    private class AsyncCallWS extends AsyncTask<String, Void, Void> {
+//
+//        TextView text_status;
+//        setContentView(R.layout.activity_main);
+//        text_status = (TextView) findViewById(R.id.txt_menu_status);
+//
+
+
+
+
+
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+            //Log.i(TAG, "doInBackground");
+            currstatus = "doInBackground";
+            getJHEDIDs("ddigreg4");
+            return null;        }
+        @Override
+        protected void onPostExecute(Void result) {
+            currstatus = "doPostExecute";
+            //Log.i(TAG, "onPostExecute");
+            currstatus = responsefromWS;
+            //tv.setText(fahren + "° F");
+        }
+        @Override
+        protected void onPreExecute() {
+            currstatus = "doPreExecute-Getting data...";
+//            Log.i(TAG, "onPreExecute");
+//            tv.setText("Calculating...");
+        }
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            currstatus = "doProgressUpdate";
+           // Log.i(TAG, "onProgressUpdate");
+        }
+    }
 }
