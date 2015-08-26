@@ -17,6 +17,10 @@ import org.ksoap2.*;
 import org.ksoap2.serialization.*;
 import org.ksoap2.transport.*;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportBasicAuth;
 
 import com.symbol.emdk.EMDKManager;
 import com.symbol.emdk.EMDKResults;
@@ -57,7 +61,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
-
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -70,9 +74,15 @@ public class MainActivity extends Activity {
     private static String fahren;*/
 
 
-   private final String NAMESPACE = "http://jhu.edu/scmmmi060801/WirelessPARJHED";
-    private final String URL = "https://dvpi.erp.johnshopkins.edu/XISOAPAdapter/MessageServlet?channel=:WirelessPARJHEDWebService_BUSS:SOAP_WirelessPARJHEDWebService&amp;version=3.0&amp;Sender.Service=x&amp;Interface=x%5Ex";
+   private final String NAMESPACE = "http://jhu.edu/scmmmi060801/WirelessPARJHED/";
+//    private final String URL = "https://dvpi.erp.johnshopkins.edu/XISOAPAdapter/MessageServlet?channel=:WirelessPARJHEDWebService_BUSS:SOAP_WirelessPARJHEDWebService&amp;version=3.0&amp;Sender.Service=x&amp;Interface=x%5Ex";
+private final String URL = "http://d241xpi.hosts.jhmi.edu:50000/XISOAPAdapter/MessageServlet?channel=:WirelessPARJHEDWebService_BUSS:SOAP_WirelessPARJHEDWebService&amp;version=3.0&amp;Sender.Service=x&amp;Interface=x%5Ex";
+
+//    private final String URL = "http://d241xpi.hosts.jhmi.edu:50000/XISOAPAdapter/MessageServlet";
+//
     private final String SOAP_ACTION = "http://jhu.edu/scmmmi060801/WirelessPARJHED/mi_WirelessPARJHED";
+//    private final String SOAP_ACTION = "http://sap.com/xi/WebService/soap1.1/mi_WirelessPARJHED";
+//    http://sap.com/xi/WebService/soap1.1
     private final String METHOD_NAME = "mi_WirelessPARJHED";
     private final String LOGIN_ID = "ddigreg4";
     private final String PASS = "55#crabs";
@@ -94,7 +104,7 @@ public class MainActivity extends Activity {
         Button button_refresh_jhedids;
         Button button_test_connect;
         Button button_exit;
-        TextView text_status;
+        final TextView text_status;
 
 
         super.onCreate(savedInstanceState);
@@ -135,14 +145,18 @@ public class MainActivity extends Activity {
         // Capture button clicks
         button_refresh_jhedids.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                AsyncCallWS task = new AsyncCallWS();
-                                //Call execute
-                                task.execute();
+
+
+//                AsyncCallWS task = new AsyncCallWS();
+//                                //Call execute
+//                                task.execute();
+
+                getJHEDIDs("ddigreg4");
                 // Start NewActivity.class
  /*               Intent myIntent = new Intent(MainActivity.this,
                         CountTemplate.class);
                 startActivity(myIntent);*/
-
+text_status.setText (responsefromWS);
 
 
 
@@ -239,7 +253,7 @@ public class MainActivity extends Activity {
 */
  public void getJHEDIDs(String ReqJHEDID) {
 //Create request
-     SoapObject request = new SoapObject("NAMESPACE", "METHOD_NAME");
+     SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
      //Property which holds input parameters
      PropertyInfo JHEDIDPI = new PropertyInfo();
      //Set Name
@@ -251,22 +265,33 @@ public class MainActivity extends Activity {
 //Add the property to request object
      request.addProperty(JHEDIDPI);
 //Create envelope
-     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
-   //  envelope.dotNet = true;
+     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+     envelope.dotNet = true;
 //Set output SOAP object
      envelope.setOutputSoapObject(request);
      //Create HTTP call object
-     HttpTransportBasicAuth androidHttpTransport = new HttpTransportBasicAuth (URL, LOGIN_ID, PASS);
+
      try {
 //Invole web service
+         HttpTransportBasicAuth androidHttpTransport = new HttpTransportBasicAuth (URL, LOGIN_ID, PASS);
+         androidHttpTransport.debug = true;
+         androidHttpTransport.setXmlVersionTag("<!--?xml version=\"1.0\" encoding= \"UTF-8\" ?-->");
          androidHttpTransport.call(SOAP_ACTION, envelope);
          //Get the response
-         SoapPrimitive response = (SoapPrimitive)
-                 envelope.getResponse();
+         SoapObject response = (SoapObject)envelope.bodyIn;
+//                 envelope.getResponse();
          //Assign it to fahren static variable
-         responsefromWS = response.toString();
+         if(response != null) {
+             responsefromWS = response.getProperty(0).toString();
+         }
+         else
+         {
+             Toast.makeText(getApplicationContext(), "No Response",Toast.LENGTH_LONG).show();
+         }
      } catch (Exception e) {
-         e.printStackTrace();    }}
+
+         e.printStackTrace();    }
+ }
 
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
 //

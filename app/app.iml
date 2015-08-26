@@ -87,7 +87,9 @@
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="ksoap2-android-assembly-2.4-jar-with-dependencies" level="project" />
+    <orderEntry type="library" exported="" name="ksoap2-android-assembly-3.1.1-jar-with-dependencies" level="project" />
     <orderEntry type="library" exported="" name="ksoap2-android-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="ksoap2-android-assembly-3.4.0-jar-with-dependencies" level="project" />
     <orderEntry type="module" module-name="com.symbol.emdk" exported="" />
   </component>
 </module>
